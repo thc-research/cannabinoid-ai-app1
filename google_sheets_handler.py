@@ -1,4 +1,18 @@
-import gspread
+import json
+from io import StringIO
+from secrets import GOOGLE_CREDENTIALS
+
+def connect_to_google():
+    scopes = [
+        'https://www.googleapis.com/auth/spreadsheets',
+        'https://www.googleapis.com/auth/drive'
+    ]
+    
+    # Read credentials from the string
+    creds_info = json.loads(GOOGLE_CREDENTIALS)
+    creds = Credentials.from_service_account_info(creds_info, scopes=scopes)
+    client = gspread.authorize(creds)
+    return clientimport gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
 
